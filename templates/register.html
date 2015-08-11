@@ -1,0 +1,33 @@
+<div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+      <div class="modal-header">
+          <h1 class="text-center">註冊</h1>
+      </div>
+      <div class="modal-body">
+          <form class="form col-md-12 center-block">
+            <div class="form-group">
+              <input ng-model="register_userid" type="text" class="form-control input-lg" placeholder="帳號">
+            </div>
+            <div class="form-group">
+              <input ng-model="register_password" type="password" class="form-control input-lg" placeholder="密碼">
+            </div>
+            <div class="form-group">
+              <input ng-model="register_name" type="text" class="form-control input-lg" placeholder="姓名">
+            </div>
+            <div class="form-group">
+              <input ng-model="register_phone" type="text" class="form-control input-lg" placeholder="電話">
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary btn-lg btn-block">註冊</button>
+            </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+          <div class="col-md-12">
+            <button ng-click="showLogin();" class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+          </div>    
+      </div>
+  </div>
+  </div>
+</div>  
