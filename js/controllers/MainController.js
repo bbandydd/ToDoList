@@ -19,7 +19,7 @@ app.controller('MainController', function MainController($scope){
     	//註冊
     	user.signUp(null, {
     		success: function(user){
-    			$scope.showToDoList();
+    			$scope.showLogin();
     			$scope.$apply();
     			alert('註冊成功');
     		},
@@ -32,19 +32,28 @@ app.controller('MainController', function MainController($scope){
     	});
     };
 
-    $scope.$watch('type', function(newValue, oldValue){
-    	console.log(newValue + ', ' + oldValue);
-    }, true);
-
     $scope.showLogin = function(){
         $scope.type = 'login';
     };
 
     $scope.login = function(){
-    	//console.log('login');
+        Parse.User.logOut();
+    	Parse.User.logIn($scope.userid, $scope.password, {
+            success: function(user){
+                $scope.showToDoList();
+
+                $scope.$apply();
+            },
+            error: function(user, error){
+                console.log(error);
+            }
+        });
     };
 
     $scope.showToDoList = function(){
         $scope.type = 'todolist';
+
+        var currentUser = Parse.User.current();
+        console.log(currentUser);
     };
 });
