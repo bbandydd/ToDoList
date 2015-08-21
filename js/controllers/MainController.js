@@ -54,6 +54,7 @@ app.controller('MainController', function MainController($scope){
         $scope.type = 'todolist';
 
         var currentUser = Parse.User.current();
-        console.log(currentUser);
+        
+        $scope.name = currentUser.attributes.name;
     };
 });
