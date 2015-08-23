@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>ToDoList</title>
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
     <link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
@@ -105,7 +105,9 @@
                 </form>
             </div>
             <ul class="list-group">
-              <li class="list-group-item" ng-repeat="item in todoItems">{{ item.get('content') }}</li>
+              <li class="list-group-item todolist" ng-repeat="item in todoItems">  {{ item.get('content') }}
+                <button class="btn btn-danger pull-right" ng-click="delTodoItem(item.id);">x</button>
+              </li>
             </ul>
         </div>
     </div>

@@ -103,6 +103,22 @@ app.controller('MainController', function MainController($scope){
                 alert(error);
             }
         })
+    };
 
+    $scope.delTodoItem = function(id){
+        if (confirm("確認刪除？")) {
+            var Todo = Parse.Object.extend('Todo');
+            var query = new Parse.Query(Todo);
+            query.get(id, {
+                success: function(todo){
+                    console.log('success:' + todo);
+                    todo.destroy({});
+                    $scope.getTodoItem();
+                },
+                error: function(todo, err){
+                    console.log('error:' + err);
+                }
+            })
+        }
     };
 });
