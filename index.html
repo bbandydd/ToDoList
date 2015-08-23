@@ -40,7 +40,7 @@
         </div>  
 
         <!-- register modal -->
-        <div id="loginModal" ng-show="type=='register'" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+        <div id="registerModal" ng-show="type=='register'" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
           <div class="modal-dialog">
           <div class="modal-content">
               <div class="modal-header">
@@ -91,6 +91,22 @@
               </div>
               </div>
             </nav>
+
+             <div class="container-fluid">
+                <form class="form col-md-10 center-block">
+                  <div class="form-group">
+                    <input ng-model="todoContent" type="text" class="form-control input-lg" placeholder="待辦事項">
+                  </div>
+                </form>
+                <form class="form col-md-2 center-block">
+                  <div class="form-group">
+                    <button ng-click="addTodoItem()" class="btn btn-primary btn-lg btn-block">新增</button>
+                  </div>
+                </form>
+            </div>
+            <ul class="list-group">
+              <li class="list-group-item" ng-repeat="item in todoItems">{{ item.get('content') }}</li>
+            </ul>
         </div>
     </div>
 

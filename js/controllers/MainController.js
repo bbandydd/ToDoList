@@ -20,6 +20,10 @@ app.controller('MainController', function MainController($scope){
     	user.signUp(null, {
     		success: function(user){
     			$scope.showLogin();
+                $scope.register_userid = '';
+                $scope.register_password = '';
+                $scope.register_name = '';
+                $scope.register_phone = '';
     			$scope.$apply();
     			alert('註冊成功');
     		},
@@ -46,7 +50,7 @@ app.controller('MainController', function MainController($scope){
                 $scope.$apply();
             },
             error: function(user, error){
-                console.log(error);
+                alert(error.message);
             }
         });
     };
@@ -61,6 +65,44 @@ app.controller('MainController', function MainController($scope){
 
         var currentUser = Parse.User.current();
         
-        $scope.name = currentUser.attributes.name;
+        $scope.name = currentUser.get('name');
+        $scope.getTodoItem();
+    };
+
+    $scope.addTodoItem = function(){
+        var Todo = Parse.Object.extend('Todo');
+        var todo = new Todo();
+
+        todo.set('content', $scope.todoContent);
+        todo.set('user', Parse.User.current());
+        todo.set('done', false);
+        todo.save(null, {
+            success: function(todo){
+                $scope.todoContent = '';
+                $scope.getTodoItem();
+            },
+            error: function(todo, err){
+                alert(err);
+            }
+        });
+    };
+
+    $scope.todoItems = [];
+
+    $scope.getTodoItem = function(){
+        var Todo = Parse.Object.extend('Todo');
+        var query = new Parse.Query(Todo);
+        query.equalTo('user', Parse.User.current());
+        query.find({
+            success: function(results){
+
+                $scope.todoItems = results;
+                $scope.$apply();
+            },
+            error: function(error){
+                alert(error);
+            }
+        })
+
     };
 });
