@@ -41,13 +41,19 @@ app.controller('MainController', function MainController($scope){
     	Parse.User.logIn($scope.userid, $scope.password, {
             success: function(user){
                 $scope.showToDoList();
-
+                $scope.userid = '';
+                $scope.password = '';
                 $scope.$apply();
             },
             error: function(user, error){
                 console.log(error);
             }
         });
+    };
+
+    $scope.logout = function(){
+        Parse.User.logOut();
+        $scope.showLogin();
     };
 
     $scope.showToDoList = function(){
