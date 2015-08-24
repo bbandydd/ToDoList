@@ -111,14 +111,31 @@ app.controller('MainController', function MainController($scope){
             var query = new Parse.Query(Todo);
             query.get(id, {
                 success: function(todo){
-                    console.log('success:' + todo);
                     todo.destroy({});
                     $scope.getTodoItem();
                 },
                 error: function(todo, err){
-                    console.log('error:' + err);
+                    console.log('error:' + err.message);
                 }
             })
         }
+    };
+
+    $scope.todoDone = '';
+
+    $scope.checkDone = function(checked, id){
+       var Todo = Parse.Object.extend('Todo');
+       var todo = new Todo();
+       todo.id = id;
+       todo.set('done', checked);
+       todo.save(null, {
+            success: function(todo){
+                $scope.$apply();
+                //console.log('success:' + todo);
+            },
+            error: function(todo, err){
+                console.log('error:' + err.message);
+            }
+       })
     };
 });

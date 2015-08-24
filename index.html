@@ -105,8 +105,16 @@
                 </form>
             </div>
             <ul class="list-group">
-              <li class="list-group-item todolist" ng-repeat="item in todoItems">  {{ item.get('content') }}
-                <button class="btn btn-danger pull-right" ng-click="delTodoItem(item.id);">x</button>
+              <li class="list-group-item todolist" ng-repeat="item in todoItems">
+                <form class="form col-md-1">
+                  <input class="todo_check" type="checkbox" ng-checked="item.get('done')" ng-init="checked=item.get('done')" ng-model="checked" ng-click="checkDone(checked, item.id)"></input>
+                </form>
+                <form class="form col-md-10">
+                  <p ng-class="{'done': checked}">{{ item.get('content') }}</p>
+                </form>
+                <form class="form col-md-1">
+                  <button class="btn btn-danger pull-right todo_delete" ng-click="delTodoItem(item.id);"></button>
+                </form>
               </li>
             </ul>
         </div>
